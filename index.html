@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Pernikahan Kirito &amp; Asuna</title>
+  <meta name="description" content="Kirito &amp; Asuna akan menikah. Tayang perdana 12 Desember 2026. Hanya di FIXNIKAH." />
+  <meta property="og:title" content="Undangan Pernikahan Kirito & Asuna" />
+  <meta property="og:description" content="Sebuah serial original. Tayang perdana 12 Desember 2026." />
+  <meta property="og:image" content="assets/hero.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+
+  <!-- ===================== GATE (pintu pembuka) ===================== -->
+  <section id="gate" class="gate">
+    <div class="door door-left"><div class="door-img" id="door-left-img"></div><span class="door-handle"></span></div>
+    <div class="door door-right"><div class="door-img" id="door-right-img"></div><span class="door-handle"></span></div>
+    <div class="gate-seam" aria-hidden="true"></div>
+
+    <div class="gate-overlay" id="gate-overlay">
+      <p class="gate-brand" id="gate-brand">FIXNIKAH</p>
+      <p class="gate-sub">Who's watching?</p>
+      <div class="gate-emblem" id="gate-emblem">K <span>&amp;</span> A</div>
+      <p class="gate-guest-label">Kepada Yth.</p>
+      <p class="gate-guest" id="gate-guest">Tamu Undangan</p>
+      <button class="gate-btn" id="gate-btn">
+        <span class="gate-btn-ic">▶</span> Buka Undangan
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== APP ===================== -->
+  <div id="app" class="app" aria-hidden="true">
+
+    <!-- SIDEBAR (desktop) / TOPBAR (mobile) -->
+    <aside class="rail" id="rail">
+      <div class="rail-top">
+        <p class="rail-mono" id="rail-mono">K &amp; A</p>
+        <p class="rail-brand">FIXNIKAH</p>
+      </div>
+      <nav class="rail-nav" id="rail-nav">
+        <a href="#hero" class="active">Beranda</a>
+        <a href="#couple">Mempelai</a>
+        <a href="#timeline">Acara</a>
+        <a href="#story">Kisah</a>
+        <a href="#memories">Galeri</a>
+        <a href="#gift">Hadiah</a>
+        <a href="#rsvp">RSVP</a>
+      </nav>
+      <div class="rail-bottom">
+        <p class="rail-date" id="rail-date">12 · 12 · 2026</p>
+        <button id="music-toggle" class="music-toggle" aria-label="Putar / hentikan musik" title="Musik latar">
+          <span class="ic-on">🔊</span><span class="ic-off">🔇</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content" id="content">
+
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-vignette"></div>
+        <div class="particles" id="particles"></div>
+        <div class="hero-inner">
+          <p class="hero-badge"><span class="n-mark">F</span> SERIAL ORIGINAL PERNIKAHAN</p>
+          <h1 class="hero-title" data-shimmer>KIRITO <span>&amp;</span> ASUNA</h1>
+          <div class="hero-meta">
+            <span class="match">99% Cocok</span><span>2026</span>
+            <span class="rating">TV-CINTA</span><span class="hd">HD</span>
+          </div>
+          <p class="hero-desc">Dua pemain. Satu kehidupan. Petualangan terbesar kami dimulai — sebuah pernikahan yang mengundang Anda menjadi saksinya.</p>
+          <p class="coming">Segera Tayang · <strong id="hero-date">12 Desember 2026</strong></p>
+          <div class="countdown" id="countdown">
+            <div><strong id="cd-days">--</strong><small>Hari</small></div>
+            <div><strong id="cd-hours">--</strong><small>Jam</small></div>
+            <div><strong id="cd-mins">--</strong><small>Menit</small></div>
+            <div><strong id="cd-secs">--</strong><small>Detik</small></div>
+          </div>
+          <div class="hashtags" id="hashtags"></div>
+          <a href="#couple" class="scroll-cue" aria-label="Gulir ke bawah">⌄</a>
+        </div>
+      </section>
+
+      <!-- VERSE -->
+      <section class="sec reveal" id="quote">
+        <div class="verse-card">
+          <span class="verse-quote">“</span>
+          <p class="verse-text" id="verse-text"></p>
+          <p class="verse-ref" id="verse-ref">Ar-Rum 21</p>
+        </div>
+      </section>
+
+      <!-- BREAKING NEWS -->
+      <section class="sec reveal" id="news">
+        <h2 class="sec-title"><span class="live-dot"></span>Breaking News</h2>
+        <div class="news-wrap">
+          <div class="news-img" id="news-img"></div>
+          <div class="news-body" id="news-body"></div>
+        </div>
+      </section>
+
+      <!-- BRIDE & GROOM -->
+      <section class="sec reveal" id="couple">
+        <h2 class="sec-title">Cast Utama <span class="muted">· Bride &amp; Groom</span></h2>
+        <div class="poster-grid">
+          <figure class="poster tilt" id="poster-groom"></figure>
+          <div class="poster-amp">♥</div>
+          <figure class="poster tilt" id="poster-bride"></figure>
+        </div>
+      </section>
+
+      <!-- TIMELINE -->
+      <section class="sec reveal" id="timeline">
+        <h2 class="sec-title">Jadwal Tayang <span class="muted">· Timeline</span></h2>
+        <div class="event-list" id="event-list"></div>
+        <a href="#rsvp" class="btn-red-block pulse">KONFIRMASI KEHADIRAN</a>
+      </section>
+
+      <!-- LOVE STORY -->
+      <section class="sec reveal" id="story">
+        <h2 class="sec-title">Our Love Story</h2>
+        <div class="story-body" id="story-body"></div>
+      </section>
+
+      <!-- MEMORIES -->
+      <section class="sec reveal" id="memories">
+        <h2 class="sec-title">Our Memories <span class="top10">TOP 10</span></h2>
+        <div class="row" id="memories-row"></div>
+      </section>
+
+      <!-- GIFT -->
+      <section class="sec reveal" id="gift">
+        <h2 class="sec-title billboard">Tanda Kasih</h2>
+        <p class="gift-intro" id="gift-intro"></p>
+        <div class="gift-grid">
+          <div class="gift-card" id="gift-banks"></div>
+          <div class="gift-card gift-address">
+            <p class="gift-address-label">Kirim Kado</p>
+            <p class="gift-address-sub">Anda dapat mengirim kado ke:</p>
+            <p class="gift-address-text" id="gift-address"></p>
+            <button class="btn-copy" data-copy-target="gift-address">Salin Alamat</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section class="sec reveal" id="rsvp">
+        <h2 class="sec-title">Konfirmasi Kehadiran</h2>
+        <form id="rsvp-form" class="rsvp-form">
+          <div class="field"><label for="r-name">Nama</label>
+            <input id="r-name" name="name" type="text" required placeholder="Nama Anda" /></div>
+          <div class="field"><label for="r-attend">Kehadiran</label>
+            <select id="r-attend" name="attending" required>
+              <option value="">Pilih…</option>
+              <option value="Hadir">Ya, saya akan hadir 🎉</option>
+              <option value="Ragu">Masih ragu-ragu</option>
+              <option value="Tidak Hadir">Maaf, tidak bisa hadir</option>
+            </select></div>
+          <div class="field"><label for="r-guests">Jumlah Tamu</label>
+            <input id="r-guests" name="guests" type="number" min="1" max="10" value="1" /></div>
+          <div class="field field-full"><label for="r-msg">Ucapan &amp; Doa</label>
+            <textarea id="r-msg" name="message" rows="3" placeholder="Tulis ucapan untuk kedua mempelai…"></textarea></div>
+          <button type="submit" class="btn-red-block field-full">Kirim Konfirmasi</button>
+          <p class="form-note field-full">Konfirmasi akan dikirim melalui aplikasi email Anda.</p>
+        </form>
+        <div class="wishes" id="wishes"></div>
+      </section>
+
+      <!-- INVITED -->
+      <section class="sec reveal" id="invited">
+        <h2 class="sec-title">Turut Mengundang</h2>
+        <ol class="invited-list" id="invited-list"></ol>
+      </section>
+
+      <!-- CLOSING -->
+      <section class="sec closing reveal" id="closing">
+        <p class="closing-text" id="closing-text"></p>
+        <p class="closing-see">See You On Our Big Day</p>
+        <h2 class="closing-couple" data-shimmer>KIRITO &amp; ASUNA</h2>
+        <p class="closing-brand">FIXNIKAH</p>
+      </section>
+    </main>
+  </div>
+
+  <audio id="bg-music" loop preload="none"></audio>
+  <div id="toast" class="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
