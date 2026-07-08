@@ -108,5 +108,22 @@ const WEDDING = {
 
   rsvpEmail: "kirito.asuna@example.com",
   formspreeEndpoint: "",
-  music: "assets/(Kamen Rider 555) Opening Theme - Acoustic Cover.mp3"
+  music: "assets/music.mp3",
+
+  /* ---- Buku Tamu / Ucapan (Firebase Firestore) ------------
+     Tempel konfigurasi Web App dari Firebase Console →
+     Project settings → Your apps → Web (</>) → firebaseConfig.
+     Selama apiKey masih kosong, buku tamu nonaktif dan form
+     RSVP tetap memakai email seperti biasa. Lihat README. */
+  firebase: {
+    apiKey: "AIzaSyDhHqdxXOiAbHefzAG4gFJoDg9mJSXPO8M",
+    authDomain: "wedd-netflix.firebaseapp.com",
+    projectId: "wedd-netflix",
+    storageBucket: "wedd-netflix.firebasestorage.app",
+    messagingSenderId: "974519452987",
+    appId: "1:974519452987:web:481eadbff0e3bbb6eba31e"
+  }
 };
+
+// Agar dapat diakses oleh modul buku tamu (js/guestbook.js)
+window.WEDDING = WEDDING;

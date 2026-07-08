@@ -325,12 +325,26 @@ img { max-width: 100%; display: block; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--red); background: #34343a; }
 .field textarea { resize: vertical; }
 .form-note { font-size: 11px; color: var(--grey); text-align: center; }
-.wishes { margin-top: 26px; display: grid; gap: 12px; max-width: 760px; }
-.wish { background: var(--card); border: 1px solid #262629; border-radius: 10px; padding: 14px 16px; animation: wishIn .4s ease; }
+.wish-form { display: grid; gap: 16px; max-width: 620px; margin: 0 auto 30px; }
+.wish-form .btn-red-block { margin: 4px 0 0; }
+
+/* Pusatkan konten bagian Ucapan & Turut Mengundang */
+#guestbook .sec-title, #invited .sec-title { justify-content: center; text-align: center; }
+#guestbook .wishes { margin-left: auto; margin-right: auto; }
+#invited .invited-list { margin-left: auto; margin-right: auto; }
+.wishes-title { font-size: 18px; font-weight: 600; margin: 34px 0 14px; }
+.wishes-title span { color: var(--gold); font-weight: 400; }
+.wishes { display: grid; gap: 12px; max-width: 760px; max-height: 520px; overflow-y: auto; padding-right: 4px; }
+.wish { display: flex; gap: 12px; background: var(--card); border: 1px solid #262629; border-radius: 10px; padding: 14px 16px; animation: wishIn .4s ease; }
 @keyframes wishIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; } }
+.wish-avatar { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(160deg, #ff5b64, var(--red)); display: grid; place-items: center; font-weight: 700; font-size: 16px; color: #fff; }
+.wish-main { flex: 1; min-width: 0; }
+.wish-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .wish-name { font-weight: 600; font-size: 14px; }
-.wish-status { font-size: 11px; color: #46d369; margin-left: 8px; }
-.wish-msg { font-size: 13px; color: var(--light); margin-top: 6px; line-height: 1.5; }
+.wish-status { font-size: 11px; color: #46d369; background: rgba(70,211,105,0.12); padding: 1px 8px; border-radius: 10px; }
+.wish-time { font-size: 11px; color: var(--grey); margin-left: auto; }
+.wish-msg { font-size: 13px; color: var(--light); margin-top: 5px; line-height: 1.5; word-wrap: break-word; }
+.wish-empty { color: var(--grey); font-size: 14px; text-align: center; padding: 20px; }
 
 /* INVITED */
 .invited-list { list-style: none; counter-reset: inv; max-width: 760px; display: grid; gap: 10px; }

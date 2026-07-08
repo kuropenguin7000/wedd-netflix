@@ -51,7 +51,7 @@
         <a href="#story">Kisah</a>
         <a href="#memories">Galeri</a>
         <a href="#gift">Hadiah</a>
-        <a href="#rsvp">RSVP</a>
+        <a href="#guestbook">Ucapan</a>
       </nav>
       <div class="rail-bottom">
         <p class="rail-date" id="rail-date">12 · 12 · 2026</p>
@@ -121,7 +121,7 @@
       <section class="sec reveal" id="timeline">
         <h2 class="sec-title">Jadwal Tayang <span class="muted">· Timeline</span></h2>
         <div class="event-list" id="event-list"></div>
-        <a href="#rsvp" class="btn-red-block pulse">KONFIRMASI KEHADIRAN</a>
+        <a href="#guestbook" class="btn-red-block pulse">KIRIM UCAPAN &amp; DOA</a>
       </section>
 
       <!-- LOVE STORY -->
@@ -151,25 +151,16 @@
         </div>
       </section>
 
-      <!-- RSVP -->
-      <section class="sec reveal" id="rsvp">
-        <h2 class="sec-title">Konfirmasi Kehadiran</h2>
-        <form id="rsvp-form" class="rsvp-form">
-          <div class="field"><label for="r-name">Nama</label>
-            <input id="r-name" name="name" type="text" required placeholder="Nama Anda" /></div>
-          <div class="field"><label for="r-attend">Kehadiran</label>
-            <select id="r-attend" name="attending" required>
-              <option value="">Pilih…</option>
-              <option value="Hadir">Ya, saya akan hadir 🎉</option>
-              <option value="Ragu">Masih ragu-ragu</option>
-              <option value="Tidak Hadir">Maaf, tidak bisa hadir</option>
-            </select></div>
-          <div class="field"><label for="r-guests">Jumlah Tamu</label>
-            <input id="r-guests" name="guests" type="number" min="1" max="10" value="1" /></div>
-          <div class="field field-full"><label for="r-msg">Ucapan &amp; Doa</label>
-            <textarea id="r-msg" name="message" rows="3" placeholder="Tulis ucapan untuk kedua mempelai…"></textarea></div>
-          <button type="submit" class="btn-red-block field-full">Kirim Konfirmasi</button>
-          <p class="form-note field-full">Konfirmasi akan dikirim melalui aplikasi email Anda.</p>
+      <!-- GUESTBOOK -->
+      <section class="sec reveal" id="guestbook">
+        <h2 class="sec-title">Ucapan &amp; Doa <span id="wishes-count"></span></h2>
+        <form id="wish-form" class="wish-form">
+          <div class="field"><label for="w-name">Nama</label>
+            <input id="w-name" name="name" type="text" required maxlength="60" placeholder="Nama Anda" /></div>
+          <div class="field"><label for="w-msg">Ucapan &amp; Doa</label>
+            <textarea id="w-msg" name="message" rows="3" required maxlength="500" placeholder="Tulis ucapan &amp; doa untuk kedua mempelai…"></textarea></div>
+          <button type="submit" class="btn-red-block">Kirim Ucapan</button>
+          <p class="form-note" id="wish-note"></p>
         </form>
         <div class="wishes" id="wishes"></div>
       </section>
@@ -196,5 +187,6 @@
 
   <script src="js/data.js"></script>
   <script src="js/script.js"></script>
+  <script type="module" src="js/guestbook.js"></script>
 </body>
 </html>

@@ -140,17 +140,18 @@
 
   /* ---------- ACTIVE NAV ---------- */
   const navLinks = $$(".rail-nav a");
-  const navMap = {};
-  navLinks.forEach((a) => { navMap[a.getAttribute("href").slice(1)] = a; });
-  const navIO = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (en.isIntersecting && navMap[en.target.id]) {
-        navLinks.forEach((a) => a.classList.remove("active"));
-        navMap[en.target.id].classList.add("active");
-      }
-    });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  ["hero", "couple", "timeline", "story", "memories", "gift", "rsvp"].forEach((id) => { const s = document.getElementById(id); if (s) navIO.observe(s); });
+  const navSections = ["hero", "couple", "timeline", "story", "memories", "gift", "guestbook"]
+    .map((id) => document.getElementById(id)).filter(Boolean);
+  function updateActiveNav() {
+    const line = window.innerHeight * 0.3;   // garis pemicu 30% dari atas viewport
+    let current = navSections[0];
+    for (const s of navSections) { if (s.getBoundingClientRect().top <= line) current = s; }
+    const href = "#" + (current && current.id);
+    navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === href));
+  }
+  window.addEventListener("scroll", updateActiveNav, { passive: true });
+  window.addEventListener("resize", updateActiveNav);
+  updateActiveNav();
 
   /* ---------- TILT (desktop) ---------- */
   if (window.matchMedia("(min-width: 1000px) and (pointer: fine)").matches) {
@@ -202,51 +203,67 @@
 
   /* ---------- MUSIC ----------
      Tombol hanya tampil bila file musik ada & berhasil dimuat.
-     Berputar hanya saat lagu diputar. */
-  let musicReady = false;
-  // Jika file musik gagal dimuat (mis. belum ada assets/music.mp3), sembunyikan tombol.
-  music.addEventListener("error", () => { musicToggle.classList.remove("show", "playing"); });
-  function playing()  { musicToggle.classList.add("show", "playing"); musicToggle.classList.remove("paused"); }
-  function paused()   { musicToggle.classList.add("show"); musicToggle.classList.remove("playing"); musicToggle.classList.add("paused"); }
+     Berputar hanya saat lagu diputar. Jika autoplay diblokir (mis. iOS),
+     musik akan otomatis dicoba lagi pada interaksi berikutnya. */
+  let musicReady = false, retryBound = false;
+  music.addEventListener("error", () => { musicToggle.classList.remove("show", "playing", "paused"); });
+  function markPlaying() { musicToggle.classList.add("show", "playing"); musicToggle.classList.remove("paused"); }
+  function markPaused()  { musicToggle.classList.add("show"); musicToggle.classList.remove("playing"); musicToggle.classList.add("paused"); }
+  function bindRetry() {
+    if (retryBound) return; retryBound = true;
+    const evts = ["pointerdown", "touchstart", "keydown"];
+    const handler = () => {
+      music.play().then(() => { markPlaying(); evts.forEach((e) => document.removeEventListener(e, handler)); }).catch(() => {});
+    };
+    evts.forEach((e) => document.addEventListener(e, handler));
+  }
   function startMusic() {
     if (!WEDDING.music) return;             // tombol tetap tersembunyi
-    if (!musicReady) { music.src = WEDDING.music; musicReady = true; }
-    music.play().then(playing).catch(() => { /* autoplay diblokir: tampilkan tombol utk diputar manual */ paused(); });
+    if (!musicReady) { music.src = WEDDING.music; music.preload = "auto"; music.load(); musicReady = true; }
+    music.play().then(markPlaying).catch(() => { markPaused(); bindRetry(); });
   }
   musicToggle.addEventListener("click", () => {
-    if (music.paused) music.play().then(playing).catch(() => {});
-    else { music.pause(); paused(); }
+    if (music.paused) music.play().then(markPlaying).catch(() => {});
+    else { music.pause(); markPaused(); }
   });
 
-  /* ---------- RSVP ---------- */
-  const form = $("#rsvp-form");
-  form.addEventListener("submit", async (e) => {
+  /* ---------- BUKU TAMU / UCAPAN ---------- */
+  const form = $("#wish-form");
+  const wishNote = $("#wish-note");
+  if (wishNote) {
+    wishNote.textContent = (window.Guestbook && window.Guestbook.enabled)
+      ? "Ucapan Anda akan tampil untuk semua tamu."
+      : "";
+  }
+  if (form) form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
     const btn = form.querySelector('button[type="submit"]');
     const original = btn.textContent;
-    if (data.message && data.message.trim()) addWish(data);
-    if (WEDDING.formspreeEndpoint) {
+
+    // Buku tamu Firestore aktif → simpan ke cloud, tampil realtime untuk semua tamu.
+    if (window.Guestbook && window.Guestbook.enabled) {
       btn.textContent = "Mengirim…"; btn.disabled = true;
       try {
-        const res = await fetch(WEDDING.formspreeEndpoint, { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form) });
-        if (!res.ok) throw new Error();
-        btn.textContent = "Terima kasih! 🎉 Konfirmasi terkirim"; form.reset();
-      } catch (err) { btn.textContent = "Gagal — coba lewat email"; openMailto(data); }
+        await window.Guestbook.addWish(data);
+        btn.textContent = "Terima kasih! 🎉 Ucapan terkirim"; form.reset();
+      } catch (err) { console.warn(err); btn.textContent = "Gagal mengirim — coba lagi"; }
       finally { btn.disabled = false; setTimeout(() => (btn.textContent = original), 4000); }
       return;
     }
-    openMailto(data); btn.textContent = "Membuka email… ✉️"; setTimeout(() => (btn.textContent = original), 3000);
+
+    // Tanpa buku tamu (belum dikonfigurasi): tampilkan lokal saja.
+    if (data.message && data.message.trim()) addWish(data);
+    form.reset();
+    btn.textContent = "Terima kasih! 🎉"; setTimeout(() => (btn.textContent = original), 3000);
   });
   function addWish(data) {
+    const name = esc(data.name || "Tamu");
     const w = el("div", "wish");
-    w.innerHTML = `<div><span class="wish-name">${esc(data.name || "Tamu")}</span><span class="wish-status">${esc(data.attending || "")}</span></div><div class="wish-msg">${esc(data.message)}</div>`;
-    $("#wishes").prepend(w);
+    w.innerHTML = `<div class="wish-avatar">${(name.trim()[0] || "?").toUpperCase()}</div>` +
+      `<div class="wish-main"><div class="wish-head"><span class="wish-name">${name}</span></div>` +
+      `<div class="wish-msg">${esc(data.message)}</div></div>`;
+    const wall = $("#wishes"); if (wall) wall.prepend(w);
   }
   function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
-  function openMailto(data) {
-    const subject = encodeURIComponent(`Konfirmasi Kehadiran — ${data.name || "Tamu"}`);
-    const body = encodeURIComponent(`Nama: ${data.name}\nKehadiran: ${data.attending}\nJumlah Tamu: ${data.guests}\nUcapan: ${data.message || "-"}`);
-    window.location.href = `mailto:${WEDDING.rsvpEmail}?subject=${subject}&body=${body}`;
-  }
 })();
