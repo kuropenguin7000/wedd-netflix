@@ -343,6 +343,9 @@ img { max-width: 100%; display: block; }
 .closing-see { font-size: 16px; color: var(--grey); letter-spacing: 1px; margin-bottom: 12px; }
 .closing-couple { font-family: 'Bebas Neue', sans-serif; font-size: clamp(46px, 9vw, 84px); letter-spacing: 2px; margin-bottom: 28px; }
 .closing-brand { font-family: 'Bebas Neue', sans-serif; color: var(--red); font-size: 28px; letter-spacing: 2px; }
+.credit { font-size: 11px; color: var(--grey); margin-top: 22px; }
+.credit a { color: var(--grey); text-decoration: underline; }
+.credit a:hover { color: var(--light); }
 
 /* TOAST */
 .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: #fff; color: #111; padding: 11px 22px; border-radius: 30px; font-size: 13px; font-weight: 600; z-index: 900; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; }

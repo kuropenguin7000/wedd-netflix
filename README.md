@@ -56,10 +56,16 @@ Anda, atau taruh file baru lalu ubah path-nya di `js/data.js`:
 
 Ukuran disarankan: potret ±1080×1440 untuk poster, dan gambar lebar/tinggi ±1920px untuk hero.
 
-### Menambahkan musik latar
+### Musik latar
 
-Taruh file lagu di `assets/music.mp3` (nama harus persis). Musik mulai saat tamu menekan
-"Buka Undangan" (kebijakan browser). Kosongkan `music: ""` di `js/data.js` untuk menonaktifkan.
+File di `assets/music.mp3` adalah **"Bittersweet" oleh Kevin MacLeod** (incompetech.com),
+lisensi [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) — bebas
+royalti, cukup mencantumkan kredit (sudah ada di bagian penutup halaman).
+
+Untuk mengganti lagu, timpa `assets/music.mp3` dengan file Anda (nama harus persis `music.mp3`).
+Jika lagu baru bukan CC-BY, sesuaikan/ hapus kredit di bagian penutup `index.html`. Musik mulai
+saat tamu menekan "Buka Undangan" (kebijakan autoplay browser). Kosongkan `music: ""` di
+`js/data.js` untuk menonaktifkan.
 
 ### RSVP masuk ke inbox (disarankan)
 
